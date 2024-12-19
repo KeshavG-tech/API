@@ -30,6 +30,17 @@ namespace ZomatoAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/dishes/id")]
+        public IHttpActionResult GetDishById([FromQuery] int disid)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var ans = db.Dishes.Where(x=>x.DishId == disid).ToList();
+                return Ok(ans);
+            }
+        }
+
         [HttpPost]
         [Route("api/dishes")]
         public IHttpActionResult AddDishes(Dish dish)

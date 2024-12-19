@@ -29,6 +29,17 @@ namespace ZomatoAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/restaurants/id")]
+        public IHttpActionResult GetRestaurantById([FromQuery] int restid)
+        {
+            using(var db = new ApplicationDbContext())
+            {
+                var ans = db.Restaurants.Where(x=>x.RestaurantId == restid).ToList();
+                return Ok(ans);
+            }
+        }
+
         [HttpPost]
         [Route("api/restaurants")]
         public IHttpActionResult AddRestaurant(Restaurant restaurant)
